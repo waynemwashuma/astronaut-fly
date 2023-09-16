@@ -6,8 +6,19 @@ import {
   Bound,
   Sprite,
   Ball,
-  Body
+  Body,
+  BufferGeometry,
+  StaticImageMaterial
 } from "../../chaos.module.js"
+
+let img = new Image()
+img.decoding = "sync"
+img.src = "/src/assets/imgs/magnet.png"
+let geometry = new BufferGeometry()
+let material = new StaticImageMaterial(img)
+
+material.width = 40
+material.height = 40
 
 export function createMagnet(x, y) {
   let entity = new Entity()
@@ -19,7 +30,7 @@ export function createMagnet(x, y) {
     .attach("movable", new Movable())
     .attach("bounds", new Bound())
     .attach("body", body)
-    .attach("sprite", new BodySprite())
+    .attach("sprite", new Sprite(geometry, material))
 
   entity.register("collision", () => {
     a.removeSelf()
