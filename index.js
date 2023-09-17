@@ -28,6 +28,7 @@ addEventListener("click", () => {
   dir.multiply(500)
   movable.rotation.radian += Math.PI * angMult
   movable.velocity.add(dir)
+  movable.velocity.clamp(0,500)
 })
 
 

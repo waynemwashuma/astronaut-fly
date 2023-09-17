@@ -57,12 +57,12 @@ const Overlaps = {
       (a.pos.y - b.pos.y) * (a.pos.y - b.pos.y);
     return distance < a.r * a.r + b.r * b.r;
   },
-    /**
-     * Checks if An AABB and a CircleBound overlap
-     * 
-     * @param {BoundingBox} a
-     * @param {BoundingCircle} b
-     */
+  /**
+   * Checks if An AABB and a CircleBound overlap
+   * 
+   * @param {BoundingBox} a
+   * @param {BoundingCircle} b
+   */
   AABBvsSphere(a, b) {
     const x = Math.max(a.min.x, Math.min(b.pos.x, a.max.x));
     const y = Math.max(a.min.y, Math.min(b.pos.y, a.max.y));
@@ -79,7 +79,7 @@ let mess = [];
 
 /**
  * A set of functions to streamline logging of items to the console
-*/
+ */
 const Err$1 = {};
 
 /**
@@ -326,20 +326,20 @@ Utils$1.inheritSystem = function(system) {
 
 /**
  * Handles time management for the game.
-*/
+ */
 class Clock {
   /**
    * Last time the clock was updated
    * 
    * @private
    * @type number
-  */
+   */
   lastcall = 0
   /**
    * Difference between the last call in the last frame and current call.
    * 
    * @type number 
-  */
+   */
   dt = 0
   /*getFrameRate(){
     return 1/(this.dt/1000)
@@ -351,12 +351,12 @@ class Clock {
    * Updates the clock
    * 
    * @param {number} accumulate
-  */
-  update(accumulate){
+   */
+  update(accumulate) {
     this.dt = accumulate - this.lastcall || 0;
     //this.framerate = this.getFrameRate()
-    this.lastcall = accumulate; 
-    this.delta = this.dt/1000;
+    this.lastcall = accumulate;
+    this.delta = this.dt / 1000;
     return this.delta
   }
 }
@@ -648,12 +648,12 @@ class BoundingCircle {
   /**
    * 
    * @type number
-  */
+   */
   r = 0
   /**
    * 
    * @type Vector_like
-  */
+   */
   pos = null
   /**
    * @param {number} [r=0]
@@ -696,7 +696,7 @@ class BoundingCircle {
           tmp = vertices[j].distanceToSquared(body.position);
           if (tmp > radsq) radsq = tmp;
         }
-        
+
       }
     }
     this.pos.x = body.position.x;
@@ -715,14 +715,14 @@ class BoundingCircle {
     this.pos.x = pos.x;
     this.pos.y = pos.y;
   }
-  toJson(){
+  toJson() {
     return {
-      posX:this.pos.x,
-      posY:this.pos.y,
-      r:this.r
+      posX: this.pos.x,
+      posY: this.pos.y,
+      r: this.r
     }
   }
-  fromJson(obj){
+  fromJson(obj) {
     this.pos.x = obj.posX;
     this.pos.y = obj.posY;
     this.r = obj.r;
@@ -748,7 +748,7 @@ function rand(min = 0, max = 1) {
  * 
  * @param {number} x The number to square
  *  @returns {number}
-*/
+ */
 function sq(x) {
   return x * x
 }
@@ -758,7 +758,7 @@ function sq(x) {
  *  @param {number} x the number to power.
  *  @param {number} [e=2] The number to power by.
  *  @returns {number}
-*/
+ */
 function exp(x, e = 2) {
   return x ** e
 }
@@ -767,7 +767,7 @@ function exp(x, e = 2) {
  * 
  * @param {number} x The number to root 
  * @returns {number}
-*/
+ */
 function sqrt(x) {
   return Math.sqrt(x)
 }
@@ -780,7 +780,7 @@ function sqrt(x) {
  *  @param {number} b The maximum bound of the interpolation.
  *  @param {number} t A number between 0 and 1 to interpopate by.Any other number greater than 1 or less than 0 will extapolate beyond b or a respectively.
  *  @returns {number}
-*/
+ */
 function lerp(a, b, t) {
   return a + t * (b - a)
 }
@@ -791,7 +791,7 @@ function lerp(a, b, t) {
  *  @param {number} number The number to round.
  *  @param {number} [precision=4] How many decimal places there should be.
  *  @returns {number}
-*/
+ */
 function round(number, precision = 4) {
   precision = 10 ** precision;
   return Math.round(number * precision) / precision
@@ -804,7 +804,7 @@ function round(number, precision = 4) {
  *  @param {number} min The minimal bound of the clamped number.
  *  @param {number} max The maximum bound of the clamped number.
  *  @returns {number}
-*/
+ */
 function clamp(value, min, max) {
   if (value < min) return min
   if (value > max) return max
@@ -820,7 +820,7 @@ function clamp(value, min, max) {
  *  @param {number} x2
  *  @param {number} y2
  *  @returns {number}
-*/
+ */
 function map(v, x1, y1, x2, y2) {
   return x2 + v * (y2 - x2) / (y1 - x1)
 }
@@ -829,7 +829,7 @@ function map(v, x1, y1, x2, y2) {
  *  @param {number} a
  *  @param {number} b
  *  @returns {number}
-*/
+ */
 function naturalizePair(a, b) {
   if (a > b)
     return (a + b) * (a + b + 1) / 2 + a;
@@ -841,7 +841,7 @@ function naturalizePair(a, b) {
  * 
  * @param {number} deg number to convert.
  *  @returns {number}
-*/
+ */
 function degToRad(deg) {
   return deg * RHI
 }
@@ -851,7 +851,7 @@ function degToRad(deg) {
  * 
  * @param {number} rad number to convert.
  *  @returns {number}
-*/
+ */
 function radToDeg(rad) {
   return rad * RHI_INV
 }
@@ -1191,13 +1191,13 @@ let Vector$1 = class Vector {
     return this
   }
 
-toJson(){
-  return this
-}
-fromJspn(obj){
-  this.x = obj.x;
-  this.y = obj.y;
-}
+  toJson() {
+    return this
+  }
+  fromJspn(obj) {
+    this.x = obj.x;
+    this.y = obj.y;
+  }
 
   [Symbol.iterator] = function*() {
     yield this.x;
@@ -1397,7 +1397,7 @@ class Angle {
   copy(angle) {
     this.degree = angle.degree;
   }
-  
+
   fromJSON(obj) {
     this.degree = obj.deg;
   }
@@ -1426,7 +1426,7 @@ class Matrix2 {
    *  @param {number} [d=1]
    *  @param {number} [e=0]
    *  @param {number} [f=0]
-  */
+   */
   constructor(a = 1, b = 0, c = 0, d = 1, e = 0, f = 0) {
 
     this.a = a;
@@ -1969,14 +1969,14 @@ class Geometry {
       vertex.add(pos);
     }
   }
-  toJson(){
+  toJson() {
     let obj = {
-      vertices:this.vertices.map((v)=>v.toJson())
+      vertices: this.vertices.map((v) => v.toJson())
     };
     return obj
   }
-  fromJson(obj){
-    this.vertices = obj.vertices.map(v=>new Vector().fromJson(v));
+  fromJson(obj) {
+    this.vertices = obj.vertices.map(v => new Vector().fromJson(v));
     this.normals = this.calcFaceNormals();
     this._dynNormals = this.normals.map(e => e.clone());
   }
@@ -1995,9 +1995,9 @@ const ObjType = Object.freeze({
 });
 /**@enum {number}*/
 const BodyType = Object.freeze({
-  DYNAMIC:2,
-  KINEMATIC:1,
-  STATIC:0
+  DYNAMIC: 2,
+  KINEMATIC: 1,
+  STATIC: 0
 });
 
 //Default settings 
@@ -2008,18 +2008,18 @@ const Settings = {
   angularDamping: 0.001,
   velocitySolverIterations: 10,
   fixedFrameRate: 0.016,
-  
+
   //For all bodies
   mass: 1,
   restitution: 0.6,
   staticFriction: 0.4,
   kineticFriction: 0.2,
-  boundPadding : 0,
+  boundPadding: 0,
   allowSleep: false,
   aabbDetectionOnly: false,
   collisionResponse: true,
   autoUpdateBound: true,
-  type:BodyType.DYNAMIC
+  type: BodyType.DYNAMIC
 };
 
 let tmp1$c = new Vector$1();
@@ -2110,7 +2110,7 @@ class Shape {
    */
   update(position, angle, scale) {
     this.angle = this.offAngle + angle;
-    this.geometry.transform(this.vertices, tmp1$c.copy(position).add(this.offPosition), this.angle, 1 , position);
+    this.geometry.transform(this.vertices, tmp1$c.copy(position).add(this.offPosition), this.angle, 1, position);
   }
 
   /**
@@ -2133,20 +2133,20 @@ class Shape {
   static calcInertia() {
     throw new Error("Implement in the children classes")
   }
-  toJson(){
+  toJson() {
     ({
-      type:this.CHAOS_OBJ_TYPE,
-      geometry:this.geometry.toJson(),
-      shapwType:this.type,
-      offset:this.offPosition.toJson(),
-      offAngle:this.offAngle
+      type: this.CHAOS_OBJ_TYPE,
+      geometry: this.geometry.toJson(),
+      shapwType: this.type,
+      offset: this.offPosition.toJson(),
+      offAngle: this.offAngle
     });
   }
-  fromJson(obj){
+  fromJson(obj) {
     this.offAngle = obj.offAngle;
     this.offPosition = obj.offset;
     this.geometry.fromJson(obj.geometry);
-    this.vertices = this.geometry.vertices.map(v=>v.clone());
+    this.vertices = this.geometry.vertices.map(v => v.clone());
   }
   static CIRCLE = 0
   static POLYGON = 1
@@ -2155,17 +2155,17 @@ class Shape {
 class Line extends Shape {
   /**
    * @type number
-  */
+   */
   length = 0
   /**
    * @param {number} length
    * @param {Vector} offset
    * @param {number} pffsetAngle
-  */
-  constructor(length,offset,offsetAngle) {
+   */
+  constructor(length, offset, offsetAngle) {
     let start = new Vector$1(1).multiply(length / 2),
       end = new Vector$1(1).multiply(-length / 2);
-    super([start, end],offset,offsetAngle);
+    super([start, end], offset, offsetAngle);
     this.length = length;
   }
 }
@@ -2815,26 +2815,26 @@ class Body {
   }
   toJson() {
     let obj = {
-      id:this.id,
+      id: this.id,
       position: this.position.toJson(),
       velocity: this.velocity.toJson(),
       acceleration: this.acceleration.toJson(),
       orientation: this.orientation.toJson(),
       rotation: this.rotation.toJson(),
       shapes: [],
-      anchors:[],
+      anchors: [],
       collisionResponse: this.collisionResponse,
       allowSleep: this.allowSleep,
       type: this.CHAOS_OBJ_TYPE,
       phyType: this.type,
       mass: this.mass,
-      inertia:this.inertia,
-      autoUpdateBound:this.autoUpdateBound,
-      boundPadding:this.boundPadding,
-      aabbDetectionOnly:this.aabbDetectionOnly,
-      mask:this.mask
+      inertia: this.inertia,
+      autoUpdateBound: this.autoUpdateBound,
+      boundPadding: this.boundPadding,
+      aabbDetectionOnly: this.aabbDetectionOnly,
+      mask: this.mask
     };
-    this.anchors.forEach((a)=>{
+    this.anchors.forEach((a) => {
       obj.anchors.push(a);
     });
     this.shapes.forEach((a) => {
@@ -2843,9 +2843,9 @@ class Body {
     return obj
   }
   //TODO  - Add way to add shapes to body
-  fromJson(obj){
+  fromJson(obj) {
     let shapes = [];
-    obj.shapes.forEach((shape)=>{
+    obj.shapes.forEach((shape) => {
       shapes.push(Shape.fromJson(shape));
     });
     let body = this;
@@ -2864,7 +2864,7 @@ class Body {
     body.autoUpdateBound = obj.autoUpdateBound;
     body.id = obj.id;
     body.mask = obj.mask;
-    obj.anchors.forEach((v)=>{
+    obj.anchors.forEach((v) => {
       body.setAnchor(new Vector$1().fromJson(v));
     });
   }
@@ -2899,7 +2899,7 @@ Utils$1.inheritComponent(Body, false, false);
 class Ball extends Body {
   /**
    * @param {number} radius
-  */
+   */
   constructor(radius) {
     super(new Circle(radius));
     this.inertia = Circle.calcInertia(this.mass, radius);
@@ -2922,27 +2922,27 @@ class Ball extends Body {
  * A body with a rectangle shape on it.
  * 
  * @augments Body
-*/
+ */
 class Box extends Body {
   /**
    * @param {number} w
    * @param {number} h
-  */
-  constructor(w,h) {
-    super(new Rectangle(w,h));
-    this.inertia = Rectangle.calcInertia(this._mass,w,h);
-    
+   */
+  constructor(w, h) {
+    super(new Rectangle(w, h));
+    this.inertia = Rectangle.calcInertia(this._mass, w, h);
+
   }
   /**
    * @inheritdoc
    * @type number 
-  */
-  set mass(x){
+   */
+  set mass(x) {
     this._mass = x;
     this.inv_mass = x === 0 ? 0 : 1 / x;
-    this.inertia = Rectangle.calcInertia(x,this.shapes[0].width,this.shapes[0].height);
+    this.inertia = Rectangle.calcInertia(x, this.shapes[0].width, this.shapes[0].height);
   }
-  get mass(){
+  get mass() {
     return this._mass
   }
 }
@@ -3217,7 +3217,7 @@ class Constraint {
       localA: this.localB.toJson(),
       stiffness: this.stiffness,
       dampening: this.dampening,
-      type:this.CHAOS_OBJ_TYPE
+      type: this.CHAOS_OBJ_TYPE
     }
   }
   fromJson(obj, world) {
@@ -3253,7 +3253,7 @@ class DistanceConstraint extends Constraint {
    * @param {Vector} localB
    */
   constructor(body1, body2, localA, localB) {
-    super(body1, body2,localA,localB);
+    super(body1, body2, localA, localB);
     this.fixed = !body1.mass || !body2.mass;
     this.dampening = 1;
     this.maxDistance = 1;
@@ -3265,8 +3265,8 @@ class DistanceConstraint extends Constraint {
    * @param {Body} body1
    * @param {Body} body2
    * @param {number} dt
-  */
-  behavior(body1, body2,dt) {
+   */
+  behavior(body1, body2, dt) {
     let arm1 = tmp1$a.copy(this.localA),
       arm2 = tmp2$8.copy(this.localB),
       pos1 = tmp3$5.copy(body1.position).add(arm1),
@@ -3280,7 +3280,7 @@ class DistanceConstraint extends Constraint {
     let difference = (magnitude - this.maxDistance) / magnitude,
       force = dist.multiply(difference * this.stiffness * this.dampening),
       massTotal = body1.inv_mass + body2.inv_mass;
-      body1.inv_inertia + body2.inv_inertia;
+    body1.inv_inertia + body2.inv_inertia;
     tmp4$4.copy(force);
     force.divide(massTotal * 2);
 
@@ -3301,8 +3301,8 @@ let tmp1$9 = new Vector$1(),
   tmp4$3 = new Vector$1(),
   tmp5$2 = new Vector$1(),
   zero = new Vector$1();
- /**
-  * A constraint that acts like a spring between two bodies
+/**
+ * A constraint that acts like a spring between two bodies
  */
 class SpringConstraint extends Constraint {
   /**
@@ -3320,13 +3320,13 @@ class SpringConstraint extends Constraint {
     this.maxDistance = 100;
     this.stiffness = 1;
   }
-    /**
+  /**
    * @inheritdoc
    * 
    * @param {Body} body1
    * @param {Body} body2
    * @param {number} dt
-  */
+   */
   behavior(body1, body2, dt) {
     let arm1 = tmp1$9.copy(this.localA),
       arm2 = tmp2$7.copy(this.localB),
@@ -3342,12 +3342,12 @@ class SpringConstraint extends Constraint {
       force = dist.multiply(difference * this.stiffness * this.dampeninging),
       massTotal = body1.inv_mass + body2.inv_mass,
       inertiaTotal = body1.inv_inertia + body2.inv_inertia;
-      force.divide(massTotal + inertiaTotal);
-      body1.velocity.add(tmp5$2.copy(force).multiply(-body1.inv_mass));
-      body2.velocity.add(tmp5$2.copy(force).multiply(body2.inv_mass));
-      
-      body1.rotation.radian += force.cross(arm1) * body1.inv_inertia;
-      body2.rotation.radian += force.cross(arm2) * -body2.inv_inertia;
+    force.divide(massTotal + inertiaTotal);
+    body1.velocity.add(tmp5$2.copy(force).multiply(-body1.inv_mass));
+    body2.velocity.add(tmp5$2.copy(force).multiply(body2.inv_mass));
+
+    body1.rotation.radian += force.cross(arm1) * body1.inv_inertia;
+    body2.rotation.radian += force.cross(arm2) * -body2.inv_inertia;
   }
 }
 
@@ -3358,7 +3358,7 @@ let velocity = new Vector$1();
 /**
  * Verlet intergration.
  * Used so that constraints can be stable at little performance cost.
-*/
+ */
 class VerletSolver {
   /**
    * @param {Body} body
@@ -3384,7 +3384,7 @@ let tmp1$8 = new Vector$1(),
 
 /**
  * Solves for impulse along collision tangent for a given body pair.
-*/
+ */
 const FrictionSolver = {
   /***/
   solve(manifold) {
@@ -3435,7 +3435,7 @@ let impulselimit = 0.8;
 
 /**
  * Determines if the body pair should be put to sleep.
-*/
+ */
 const ContactSolver = {
   solve(a, b, impulse, contactNo) {
     if (contactNo == 2) {
@@ -3462,7 +3462,7 @@ let dampen = Settings.posDampen;
 
 /**
  * Solves the interpenetration of bodies.
-*/
+ */
 const PenetrationSolver = {
   solve(manifold, inv_dt) {
     let { bodyA, bodyB, ca1, ca2 } = manifold;
@@ -3486,7 +3486,7 @@ let tmp1$6 = new Vector$1(),
 
 /**
  * Solves for the collision normal impulse of a given body pair.
-*/
+ */
 const ImpulseSolver = {
   solve(manifold) {
     let { bodyA, bodyB, ca1, ca2, restitution } = manifold;
@@ -3861,16 +3861,16 @@ class Broadphase {
 
 /**
  * Most basic broadphase.Should be used when number of bodies are few(i.e less than 100)
-*/
+ */
 class NaiveBroadphase extends Broadphase {
   /**
    * @private
    * @type Body[]
-  */
+   */
   bodies = null
   /**
    * @param {World} world
-  */
+   */
   constructor(world) {
     super();
     this.bodies = world.objects;
@@ -3880,7 +3880,7 @@ class NaiveBroadphase extends Broadphase {
    * @param {Bounds} bound Region to check in.
    * @param {Body[]} target Empty array to store results.
    * @returns {Body[]}
-  */
+   */
   query(bound, target) {
     closeObjects = target || [];
     for (var i = 0; i < this.objects.length; i++) {
@@ -3894,7 +3894,7 @@ class NaiveBroadphase extends Broadphase {
    * @inheritdoc
    * @param {CollisionPair[]} target Empty array to store results.
    * @returns {CollisionPair[]}
-  */
+   */
   getCollisionPairs(target) {
     target = target || [];
     let bodies = this.bodies,
@@ -3903,7 +3903,7 @@ class NaiveBroadphase extends Broadphase {
       let a = bodies[i];
       for (let j = i + 1; j < length; j++) {
         let b = bodies[j];
-        if(!this.canCollide(a,b))continue
+        if (!this.canCollide(a, b)) continue
         if (!a.bounds.intersects(b.bounds))
           continue
         let list = {
@@ -4391,7 +4391,7 @@ class Tree extends Broadphase {
  * @callback Traverser
  * @param {Node} node
  * @returns {boolean}
-*/
+ */
 
 /**
  * Class responsible for updating bodies,constraints and composites.
@@ -4608,7 +4608,7 @@ class World {
     let length = this.CLMDs.length,
       manifold,
       inv_dt = 1 / dt;
-      this.count - 1;
+    this.count - 1;
 
 
 
@@ -4806,7 +4806,7 @@ class World {
   removeContraint(constraint) {
     let arr = constraint.fixed ? this.fixedConstraits : this.constraints;
     let temp = arr.pop();
-    if(constraint.index == arr.length) return constraint
+    if (constraint.index == arr.length) return constraint
     arr[constraint.index] = temp;
     temp.index = constraint.index;
     constraint.index = -1;
@@ -4865,18 +4865,18 @@ class Transform {
    * @param {number} a
    * @returns 
    */
-  constructor(x,y,a){
-    this.position = new Vector$1(x,y);
+  constructor(x, y, a) {
+    this.position = new Vector$1(x, y);
     this.orientation = new Angle(a);
   }
-  init(){}
-  toJson(){
+  init() {}
+  toJson() {
     return {
       position: this.position.toJson(),
-      orientation:this.orientation.toJson()
+      orientation: this.orientation.toJson()
     }
   }
-  fromJson(obj){
+  fromJson(obj) {
     this.position.fromJson(obj.position);
     this.orientation.fromJson(obj.orientation);
   }
@@ -4889,7 +4889,7 @@ class Camera {
    */
   transform = new Transform()
 
-  constructor() { }
+  constructor() {}
   /**
    * @type Vector
    */
@@ -4913,7 +4913,7 @@ class Camera {
 class Renderer {
   /**
    * @type number
-  */
+   */
   _rafID = 0
   /**
    * Used to throttle the frame rate.
@@ -5113,7 +5113,7 @@ class Renderer2D extends Renderer {
     if (this.background != void 0)
       this.background.update(this, dt);
     this.ctx.save();
-    this.ctx.translate(this.camera.transform.position.x,-this.camera.transform.position.y);
+    this.ctx.translate(this.camera.transform.position.x, -this.camera.transform.position.y);
     this.ctx.rotate(this.camera.transform.orientation.radian);
     for (var i = 0; i < this.objects.length; i++) {
       this.objects[i].render(this.ctx, dt);
@@ -5140,7 +5140,7 @@ class Renderer2D extends Renderer {
   }
   /**
    * @param {Sprite} sprite
-  */
+   */
   addUI(sprite) {
     this.renderLast.push(sprite);
   }
@@ -5156,9 +5156,9 @@ class Renderer2D extends Renderer {
  * Renders images and paths to the webgpu context of a canvas.
  * 
  * @extends Renderer
-*/
-class WebGPURenderer extends Renderer{
-  constructor(){
+ */
+class WebGPURenderer extends Renderer {
+  constructor() {
     throw new Error("Dont get too excited yet :)")
   }
 }
@@ -5168,8 +5168,8 @@ class WebGPURenderer extends Renderer{
  * 
  * @extends Renderer
  */
-class WebGLRenderer extends Renderer{
-  constructor(){
+class WebGLRenderer extends Renderer {
+  constructor() {
     throw new Error("Hold your horses there!I haven't implemented this yet!")
   }
 }
@@ -5253,7 +5253,7 @@ class Sprite {
     ctx.translate(...this._position);
     ctx.rotate(this._orientation.radian);
     ctx.scale(...this._scale);
-    this.material?.render(ctx,dt,this.geometry?.drawable);
+    this.material?.render(ctx, dt, this.geometry?.drawable);
     ctx.closePath();
     ctx.restore();
   }
@@ -5261,10 +5261,10 @@ class Sprite {
    * @param {Entity} entity
    */
   init(entity) {
-    if(!entity){
+    if (!entity) {
       this._position = new Vector$1();
       this._orientation = new Angle();
-      this._scale = new Vector$1(1,1);
+      this._scale = new Vector$1(1, 1);
       return
     }
     this.entity = entity;
@@ -5273,20 +5273,20 @@ class Sprite {
     this._position = transform.position;
     this._orientation = transform.orientation;
     //TODO - Correct this later
-    this._scale = new Vector$1(1,1);
+    this._scale = new Vector$1(1, 1);
     return this
   }
-  toJson(){
+  toJson() {
     let obj = {
-      pos:this._position.toJson(),
-      angle:this._orientation.toJson(),
-      geometry:this.geometry?.toJson(),
-      material:this.material?.toJson(),
-      parent:this.parent?.id
+      pos: this._position.toJson(),
+      angle: this._orientation.toJson(),
+      geometry: this.geometry?.toJson(),
+      material: this.material?.toJson(),
+      parent: this.parent?.id
     };
     return obj
   }
-  fromJson(obj,renderer){
+  fromJson(obj, renderer) {
     this.geometry?.fromJson(obj.geometry);
     this.material?.fromJson(obj.material);
     this.position.fromJson(obj.pos);
@@ -5456,14 +5456,14 @@ class CircleGeometry {
 
 /**
  * @interface
-*/
-class Material{
+ */
+class Material {
   /**
    * @param {CanvasRenderingContext2D} ctx
    * @param {number} dt
    * @param {Path2D} [path]
-  */
-  render(ctx,dt,path){
+   */
+  render(ctx, dt, path) {
     throw "Override this method in derived class"
   }
 }
@@ -5471,7 +5471,7 @@ class Material{
 /**
  * 
  * @implements Material
-*/
+ */
 class BasicMaterial {
   /**
    * 
@@ -5496,7 +5496,7 @@ class BasicMaterial {
    * @param {number} dt
    * @param {Path2D} path
    */
-  render(ctx,dt, path) {
+  render(ctx, dt, path) {
     if (!this.wireframe) {
       ctx.fillStyle = this.fill;
       ctx.fill(path);
@@ -5721,7 +5721,7 @@ class BodySprite extends Sprite {
    * @inheritdoc
    *  @param {CanvasRenderingContext2D} ctx
    * @param {number} dt
-  */
+   */
   render(ctx, dt) {
 
     if (this.body.physicsType == ObjType.COMPOSITE) {
@@ -5772,7 +5772,7 @@ class BodySprite extends Sprite {
         body.bounds.max.y - this.body.bounds.min.y
       );
     }
-    stroke(ctx,"red");
+    stroke(ctx, "red");
     ctx.closePath();
   }
   /**
@@ -5791,11 +5791,11 @@ class BodySprite extends Sprite {
           shape.position.y,
           shape.radius);
         Vector$1.fromRad(shape.angle, r).multiply(shape.radius);
-        line(ctx,...shape.position,
+        line(ctx, ...shape.position,
           shape.position.x + r.x,
           shape.position.y + r.y);
       } else {
-        vertices(ctx,shape.vertices, true);
+        vertices(ctx, shape.vertices, true);
       }
     }
     stroke(ctx);
@@ -5831,7 +5831,7 @@ class AgentSprite extends Sprite {
    */
   agent = null
   constructor() {
-    super(geometry,material);
+    super(geometry, material);
   }
   /**
    * @inheritdoc
@@ -6000,22 +6000,22 @@ class ParticleSystemSprite extends Sprite {
    * @param {Particle} p
    * @param {number} dt
    */
-  behavior(p,dt) {
+  behavior(p, dt) {
     p.velocity.set(
-      p.velocity.x + rand(-1, 1)*dt,
-      p.velocity.y + rand(0, 0.3)*dt
+      p.velocity.x + rand(-1, 1) * dt,
+      p.velocity.y + rand(0, 0.3) * dt
     );
   }
   /**
    * @inheritdoc
    *  @param {CanvasRenderingContext2D} ctx
    * @param {number} dt
-  */
+   */
   render(ctx, dt) {
     for (let i = this._particles.length - 1; i > 0; i--) {
       let p = this._particles[i];
       p.update(ctx, dt);
-      this.behavior(p,dt);
+      this.behavior(p, dt);
       p.draw(ctx, dt);
       if (!p.active) {
         this._particles.splice(i, 1);
@@ -6330,7 +6330,7 @@ if (DEVICE.audio = !!ae.canPlayType)
     DEVICE.supportedAudio.push("wav");
   }
 
-  if (ae.canPlayType('audio/x-m4a;').replace(/^no$/,'') || ae.canPlayType('audio/aac;').replace(/^no$/, ''))
+  if (ae.canPlayType('audio/x-m4a;').replace(/^no$/, '') || ae.canPlayType('audio/aac;').replace(/^no$/, ''))
   {
     DEVICE.supportedAudio.push("m4a");
   }
@@ -6587,7 +6587,7 @@ class DOMEventHandler {
  * This provides a way to fire off an entity's collision event handler registered to it.
  * 
  * @param {CollisionPair[]} clmds an array of collision manifolds
-*/
+ */
 function defaultCollisionHandler(clmds) {
   let a, b;
   for (let i = 0; i < clmds.length; i++) {
@@ -6611,7 +6611,7 @@ function defaultCollisionHandler(clmds) {
  * This provides a way to fire off an entity's precollision event handler registered to it
  * 
  * @param {Manifold[]} clmds an array of collision manifolds
-*/
+ */
 function defaultPrecollisionHandler(clmds) {
   let a, b;
   for (let i = 0; i < clmds.length; i++) {
@@ -6633,31 +6633,31 @@ function defaultPrecollisionHandler(clmds) {
 
 /**@enum {string}*/
 const Events = {
-  COLLISION : "collision",
-  PRECOLLISION : "precollision",
-  PREUPDATE : "preupdate",
-  POSTUPDATE : "postupdate",
-   UPDATE : "postupdate",  
-   INITIALIZE : "init",
-   ADD : "add",
-   REMOVE : "remove",
-   PAUSE : "pause",
-   PLAY : "play"
+  COLLISION: "collision",
+  PRECOLLISION: "precollision",
+  PREUPDATE: "preupdate",
+  POSTUPDATE: "postupdate",
+  UPDATE: "postupdate",
+  INITIALIZE: "init",
+  ADD: "add",
+  REMOVE: "remove",
+  PAUSE: "pause",
+  PLAY: "play"
 };
 
 /**
  * Handled the keyboard input of an application on a PC.
-*/
+ */
 class Keyboard {
   /**
    * Dictionary of keys showing if they are active or not.
    * 
    * @type Object<string,boolean>
-  */
+   */
   keys = {}
   /**
    * @param {DOMEventHandler} eh
-  */
+   */
   constructor(eh) {
     this.keys = {};
     this.init(eh);
@@ -6668,7 +6668,7 @@ class Keyboard {
    * @private
    * @param {string} keycode
    * @returns {string}
-  */
+   */
   normalize(keycode) {
     let r = keycode;
     if (keycode.includes('Key')) {
@@ -6680,23 +6680,23 @@ class Keyboard {
    * Adds Keyboard events to the DOM.
    * 
    * @param {DOMEventHandler} eh
-  */
+   */
   init(eh) {
-    eh.add('keydown',this._onDown);
-    eh.add('keyup',this._onUp);
+    eh.add('keydown', this._onDown);
+    eh.add('keyup', this._onUp);
   }
   /**
    * @private
-  */
+   */
   _onDown = e => {
     let key = this.normalize(e.code);
     this.keys[key] = true;
     this.activeKeys.push(key);
   }
-    /**
-     * @private
-     */
-  _onUp = e =>{
+  /**
+   * @private
+   */
+  _onUp = e => {
     this.keys[this.normalize(e.code)] = false;
   }
 }
@@ -6848,8 +6848,7 @@ class Mouse {
   /**
    * @private
    */
-  _onWheel = (e) => {
-  }
+  _onWheel = (e) => {}
   /**
    * @private
    */
@@ -6876,11 +6875,11 @@ class Touch {
   touches = []
   /**
    * @type number
-  */
+   */
   clickCount = 0
   /**
    * @param {DOMEventHandler} eh
-  */
+   */
   constructor(eh) {
     this.init(eh);
   }
@@ -6937,26 +6936,26 @@ class Input {
    * This attaches callbacks to the DOM.
    * 
    * @type DOMEventHandler
-  */
+   */
   DOMEventHandler = null
   /**
    * 
    * @type Mouse
-  */
+   */
   mouse = null
   /**
    * 
    * @type Touch
-  */
+   */
   touch = null
   /**
    * 
    * @type Keyboard
-  */
+   */
   keyboard = null
   /**
    * @param {DOMEventHandler} eventHandler
-  */
+   */
   constructor(eventHandler) {
     this.DOMEventHandler = eventHandler || new DOMEventHandler();
     this.mouse = new Mouse(this.DOMEventHandler);
@@ -6965,14 +6964,14 @@ class Input {
   }
   /**
    * Updates all inputs.
-  */
+   */
   update() {
     this.mouse.update();
     this.touch.update();
   }
   /**
    * Remove all bindings to the DOM for all input types.
-  */
+   */
   dispose() {
     //TODO remove eventlisteners
     this.mouse.dispose();
@@ -7238,13 +7237,24 @@ class Manager {
     let index = this.objects.indexOf(object);
     object.removeComponents();
     Utils$1.removeElement(this.objects, index);
+    object._global = null
+    object.active = false
     this.events.trigger("remove", object);
 
   }
   /**
    * This removes all of the entities and components from the manager
    */
-  clear() {
+  clear(tags) {
+    if (tags) {
+      for (let i = this.objects.length - 1; i >= 0; i--) {
+        for (var j = 0; j < tags.length; j++) {
+          if (this.objects[i].hasTag(tags[j]))
+            this.remove(this.objects[i]);
+        }
+      }
+      return
+    }
     for (let i = this.objects.length - 1; i >= 0; i--) {
       this.remove(this.objects[i]);
     }
@@ -7291,7 +7301,6 @@ class Manager {
       }
     }
   }
-
   /**
    * Marches the update loop forward,updating
    * the systems
@@ -7467,6 +7476,7 @@ class Manager {
         target.push(entities[i]);
       }
     }
+    return target
   }
   /**
    * Ignore this,im going to remove it and the rest of cloning utilities.
@@ -7540,8 +7550,8 @@ class Manager {
  * Updates components assigned to it.
  * 
  * @interface
-*/
-class System{}
+ */
+class System {}
 
 Utils$1.inheritSystem(System);
 
@@ -7550,25 +7560,25 @@ Utils$1.inheritSystem(System);
  * @function
  * @name System#add
  * @param {Component} component
-*/
+ */
 /**
  * 
  * @function
  * @name System#remove
  * @param {Component} component
-*/
+ */
 /**
  * 
  * @function
  * @name System#init
  * @param {Manager} manager
  */
- /**
-  * 
-  * @function
-  * @name System#update
-  * @param {number} dt
-  */
+/**
+ * 
+ * @function
+ * @name System#update
+ * @param {number} dt
+ */
 
 /**
  * Component to hold requirements for an entity to move.
@@ -7616,12 +7626,12 @@ class Bound extends Component {
    */
   bounds = new BoundingBox()
   entity = null
-  toJson(){
+  toJson() {
     return {
-      bounds:this.bounds.toJson()
+      bounds: this.bounds.toJson()
     }
   }
-  fromJson(obj){
+  fromJson(obj) {
     this.bpunds.fromJson(obj.bounds);
   }
 }
@@ -7864,7 +7874,7 @@ class Entity {
       entity.addTag(a);
     });
     for (var key in obj.comps) {
-      let c =new compList[key]().fromJSON(obj.comps[key]);
+      let c = new compList[key]().fromJSON(obj.comps[key]);
       entity.attach(key, c);
     }
     return entity
@@ -7959,7 +7969,7 @@ class Sfx {
   }
   /**
    * Set callback when the sound finishes playing.
-  */
+   */
   set onended(x) {
     this._onended = x;
   }
@@ -8072,8 +8082,8 @@ class AudioHandler {
    * @type string
    */
   baseUrl = ""
-    /**
-     * If the manager can play a sound.
+  /**
+   * If the manager can play a sound.
    * @type boolean
    */
   canPlay = false
@@ -8215,13 +8225,13 @@ class AgentManager {
    * A list of agents to update every frame.
    * 
    * @type Agent[]
-  */
+   */
   objects = []
   /**
    * Initializes the manager.
    * 
    * @param {Manager} manager
-  */
+   */
   init(manager) {
     manager.setComponentList("agent", this.objects);
   }
@@ -8229,7 +8239,7 @@ class AgentManager {
    * Update all registered agents.
    * 
    * @param {number} dt
-  */
+   */
   update(dt) {
     let inv_dt = 1 / dt;
     for (var i = 0; i < this.objects.length; i++) {
@@ -8477,43 +8487,43 @@ let tmp1$4 = new Vector$1();
  * Creates a behaviour to evade a certain position.
  * 
  * @augments Behaviour
-*/
+ */
 class EvadeBehaviour extends Behaviour {
   /**
    * Distance in which to begin evading.
    * 
    * @type number
-  */
+   */
   radius = 200
   /**
    * @param {Vector} pursuer
-  */
+   */
   constructor(pursuer) {
     super();
     this.pursuer = pursuer;
   }
-    /**
+  /**
    * @inheritdoc
    * @param {Agent} agent
    */
   init(agent) {
     this.position = agent.position;
     this.velocity = agent.velocity;
-    
+
   }
-    /**
+  /**
    * @inheritdoc
    * @param {Vector} target
    * @param {number} inv_dt
    * @returns Vector the first parameter
    */
-  calc(target,inv_dt) {
+  calc(target, inv_dt) {
     let difference = tmp1$4.copy(this.position).sub(this.pursuer);
     let length = difference.magnitude();
-    if(length == 0 || length > this.radius)return
-    difference.setMagnitude(map(length,0,this.radius,this.maxSpeed,0));
+    if (length == 0 || length > this.radius) return
+    difference.setMagnitude(map(length, 0, this.radius, this.maxSpeed, 0));
     let steering = difference.sub(this.velocity).multiply(inv_dt);
-    
+
     steering.clamp(0, this.maxForce);
     target.copy(steering);
   }
@@ -8521,12 +8531,12 @@ class EvadeBehaviour extends Behaviour {
 
 let tmp1$3 = new Vector$1(),
   tmp2$2 = new Vector$1();
-  
+
 /**
  * Creates a behaviour that is used to make an agent wander in an organic manner.
  * 
  * @augments Behaviour
-*/
+ */
 class WanderBehaviour extends Behaviour {
   /**
    * This sets a point on the perimeter circle that is infront of the agent.
@@ -8537,12 +8547,12 @@ class WanderBehaviour extends Behaviour {
   /**
    * This clamps the offset that modify the WandererBehaviour#theta value each frame.
    * 
-  * @type number
-  */
+   * @type number
+   */
   dtheta = 10
   /**
    * How big should the circle in front of the agent be.
-  */
+   */
   _radius = 100
   constructor() {
     super();
@@ -8585,26 +8595,26 @@ class WanderBehaviour extends Behaviour {
  * Not impemented.
  * 
  * @augments Behaviour
-*/
+ */
 class Pursuit {
   constructor() {
 
   }
-    /**
-     * @inheritdoc
-     * @param {Agent} agent
-     */
-  init(){
-    
+  /**
+   * @inheritdoc
+   * @param {Agent} agent
+   */
+  init() {
+
   }
-    /**
-     * @inheritdoc
-     * @param {Vector} target
-     * @param {number} inv_dt
-     * @returns Vector the first parameter
-     */
-  calc(target){
-    
+  /**
+   * @inheritdoc
+   * @param {Vector} target
+   * @param {number} inv_dt
+   * @returns Vector the first parameter
+   */
+  calc(target) {
+
   }
 }
 
@@ -8633,56 +8643,56 @@ class Flock {
    * @param {number} inv_dt
    * @returns Vector the first parameter
    */
-  calc(target,inv_dt) {
+  calc(target, inv_dt) {
 
   }
 }
 
 let tmp1$2 = new Vector$1();
-  
+
 /**
  * Creates a behaviour to seek out a target and move towards it.
  * 
  * @augments Behaviour
-*/
+ */
 class SeekBehaviour extends Behaviour {
   /**
    * Not implemented.
    * Radius in which to seek out the target.
    * 
    * @type number
-  */
+   */
   radius = 100
   /**
    * @type Vector
-  */
+   */
   target = null
   /**
    * @param {Vector} target
-  */
+   */
   constructor(target) {
     super();
     this.target = target;
   }
-    /**
-     * @inheritdoc
-     * @param {Agent} agent
-     */
+  /**
+   * @inheritdoc
+   * @param {Agent} agent
+   */
   init(agent) {
     this.position = agent.position;
     this.velocity = agent.velocity;
   }
-    /**
-     * @inheritdoc
-     * @param {Vector} target
-     * @param {number} inv_dt
-     * @returns Vector the first parameter
-     */
-  calc(target,inv_dt) {
+  /**
+   * @inheritdoc
+   * @param {Vector} target
+   * @param {number} inv_dt
+   * @returns Vector the first parameter
+   */
+  calc(target, inv_dt) {
     let difference = tmp1$2.copy(this.target).sub(this.position);
     difference.setMagnitude(this.maxSpeed);
     let steering = difference.sub(this.velocity).multiply(inv_dt);
-    
+
     steering.clamp(0, this.maxForce);
     target.copy(steering);
   }
@@ -8982,7 +8992,7 @@ class Path {
  * Used to manipulate and read from the cookie string.
  * 
  * @module Cookie
-*/
+ */
 
 const Cookies = {
   /**
@@ -8991,8 +9001,8 @@ const Cookies = {
    * @param {string} n Key of the cookie.
    * @param {string} v The value of the cookie.
    * @param {number} [=12000] Max age of the cookie before it is deleted.
-  */
-  set(n, v, maxAge= 12000) {
+   */
+  set(n, v, maxAge = 12000) {
     document.cookie = `${n}=${v};maxAge=${maxAge}`;
   },
   /**
@@ -9000,7 +9010,7 @@ const Cookies = {
    * 
    * @param {string} n Key of the cookie
    * @returns {string}
-  */
+   */
   get(n) {
     let arr = document.cookie.split(";");
     for (var i = 0; i < arr.length; i++) {
@@ -9013,13 +9023,13 @@ const Cookies = {
    * Removes a cookie by its key from cookies.
    * 
    * @param {string} n Key of the cookie
-  */
-  delete(n){
+   */
+  delete(n) {
     document.cookie = `${n}=; max-age=0`;
   },
   /**
    * Removes all cookies that are contained on the document.
-  */
+   */
   clear() {
     let arr = document.cookie.split(";");
     for (var i = 0; i < arr.length; i++) {
@@ -9033,30 +9043,30 @@ const Cookies = {
  * This provides temporary storage when your application tab is open.
  * 
  * @module Session
-*/
+ */
 const Session = {
   /**
    * Adds a value to sessions
    * 
    * @param {string} k 
    * @param {any} v
-  */
-  set(k,v) {
+   */
+  set(k, v) {
     JSON.stringify(v);
-    sessionStorage.setItem(k,v);
+    sessionStorage.setItem(k, v);
   },
   /**
    * Gets a value from sessions using a key
    * 
    * @param {string} k A key to retrieve a value
-  */
+   */
   get(k) {
     let json = sessionStorage.getItem(k);
     return JSON.parse(json)
   },
   /**
    * Removes everything from sessions
-  */
+   */
   clear() {
     sessionStorage.clear();
   }
@@ -9064,7 +9074,7 @@ const Session = {
 
 /**
  * This provides permanent storage
-*/
+ */
 
 const Storage = {
   /**
@@ -9072,23 +9082,23 @@ const Storage = {
    * 
    * @param {string} k 
    * @param {any} v
-  */
-  set(k,v) {
+   */
+  set(k, v) {
     JSON.stringify(v);
-    localStorage.setItem(k,v);
+    localStorage.setItem(k, v);
   },
   /**
    * Gets a value from local storage by its key.
    * 
    * @param {string} k
-  */
+   */
   get(k) {
     let json = localStorage.getItem(k);
     return JSON.parse(json)
   },
   /**
    * Removes everything from local storage 
-  */
+   */
   clear() {
     localStorage.clear();
   }
@@ -9099,11 +9109,12 @@ export { Agent, AgentManager, AgentSprite, Angle, ArriveBehaviour, AudioHandler,
  * @typedef Bounds
  * @property {Vector_like} max
  * @property {Vector_like} min
- *//**
+ */
+/**
  * @typedef CollisionPair
  * @property {Body} a
  * @property {Body} b
-*/
+ */
 
 /**
  * @typedef Manifold
@@ -9137,7 +9148,8 @@ export { Agent, AgentManager, AgentSprite, Angle, ArriveBehaviour, AudioHandler,
  * @property {number} contactNo
  * @property {number} indexA
  * @property {number} indexB
- *//**
+ */
+/**
  * @typedef Vector_like
  * @property {number} x
  * @property {number} y

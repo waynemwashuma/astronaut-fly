@@ -17,4 +17,7 @@ export class CamFollowerController extends CamController {
     let y = this.targetPosition.y - this.transform.position.y
     this.transform.position.y += y + this.offset.y
   }
+  reset(){
+    this.maxheight = innerHeight
+  }
 }

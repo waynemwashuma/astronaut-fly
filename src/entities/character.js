@@ -31,6 +31,6 @@ export function createCharacter(x, y, a) {
     .attach("wrap",new WrapAround())
 
   entity.addTag("character")
-
+  entity.addTag("persistent")
   return entity
 }

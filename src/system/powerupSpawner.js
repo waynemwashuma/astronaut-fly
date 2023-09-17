@@ -9,7 +9,7 @@ import { createStar, createMagnet, createBooster } from "../entities/index.js"
 
 export class PowerUpSpawner extends System {
   padding = new Vector(0, 100)
-  next = innerWidth
+  next = innerHeight
   position = null
   period = -innerHeight
   offset = 0
@@ -25,7 +25,7 @@ export class PowerUpSpawner extends System {
   }
   update() {
     if (this.position.y <= this.next) {
-      this.next = this.position.y + this.period// + this.offset
+      this.next = this.position.y + this.period
       this.generate()
     }
   }
@@ -38,10 +38,13 @@ export class PowerUpSpawner extends System {
     let startX = innerWidth - this.padding.x / 2
     for (let i = startX; i >= 0; i -= this.padding.x) {
       for (let j = innerHeight / 2; j >= 0; j -= this.padding.y) {
-        let powerUp = createBooster(i, j + y)
+        let powerUp = createStar(i, j + y)
         this.manager.add(powerUp)
       }
     }
+  }
+  reset(){
+    this.next = innerHeight
   }
 
 }
