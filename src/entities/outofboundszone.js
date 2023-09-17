@@ -18,7 +18,7 @@ export function createBounds() {
   let entity = new Entity()
   let follower = new Follower(renderer.camera.transform.position)
 
-  let body = createBoundingBox(-100, 100, renderer.width + 200, renderer.height + 200, 100)
+  let body = createBoundingBox(-100, 0, renderer.width + 200, renderer.height + 200, 100)
   body.type = Body.STATIC
   body.mask.group = 1
   entity
@@ -28,9 +28,17 @@ export function createBounds() {
     .attach("body", body)
     .attach("sprite", new BodySprite())
     .attach("follow", follower)
+  entity.register("precollision", (a, b) => {
+    if (b.hasTag("character")) {
+      return //endGame()
+    }
+    //b.removeSelf()
+  })
 
-  entity.register("collision", () => {
-    //alert("You lose")
+  entity.register("collision", (a, b) => {
+    if (b.hasTag("character")) {
+      return //endGame()
+    }
   })
   entity.addTag("bounds")
 
@@ -44,5 +52,9 @@ function createBoundingBox(x, y, w, h, t = 20) {
     w + 2 * t, t, new Vector(x + w / 2, y + h + t / 2)
   )
   let l4 = new Rectangle(t, h, new Vector(x - t / 2, y + h / 2))
-  return new Body(l1, l2, l3, l4)
+  return new Body(l2, l3, l4)
+}
+
+function endGame() {
+  alert("You lose,barry!")
 }

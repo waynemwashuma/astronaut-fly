@@ -26,7 +26,6 @@ export class PowerUpSpawner extends System {
   update() {
     if (this.position.y <= this.next) {
       this.next = this.position.y + this.period// + this.offset
-      console.log(this.next,this.position.y);
       this.generate()
     }
   }
@@ -46,5 +45,3 @@ export class PowerUpSpawner extends System {
   }
 
 }
-
-//console.log(round(1234.765466,-2));
