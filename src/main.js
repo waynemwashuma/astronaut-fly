@@ -19,9 +19,9 @@ let startposition = new Vector(
 )
 let gravity = 400
 let info = {
-  stars: 0,
-  booster: 0,
-  maxBoosters: 0
+  score:0,
+  boosters: 9,
+  maxBoosters: 9
 }
 const manager = new Manager()
 
@@ -53,7 +53,6 @@ manager.registerSystem("spawner", powerSpawner)
 //powerSpawner.genBox(400)
 
 function endGame(character) {
-
   let allowed = manager.getEntitiesByTags(["persistent"])
   manager.clear()
   allowed.forEach(e => manager.add(e))
@@ -67,7 +66,10 @@ function startGame(character) {
   let transform = character.get("transform")
 
   renderer.camera.transform.position.set(0, 0)
-
+  
+  info.boosters = info.maxBoosters
+  info.score = 0
+  
   transform.position.copy(startposition)
   transform.orientation.degree = -90
   movable.rotation.degree = 0
@@ -90,3 +92,4 @@ export {
 }
 
 console.log(manager);
+manager.pause()
