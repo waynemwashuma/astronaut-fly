@@ -33,6 +33,7 @@ export function createStar(x, y) {
     .attach("body", body)
     .attach("sprite", new Sprite(geometry, material))
 
+  entity.addTag("powerup")
 
 
   entity.register("precollision", (a, b) => {

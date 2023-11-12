@@ -30,9 +30,10 @@ export function createBooster(x, y) {
     .attach("bounds", new Bound())
     .attach("body", body)
     .attach("sprite", new Sprite(geometry, material))
-  
-  
-  entity.register("collision",(a,b)=>{
+
+  entity.addTag("powerup")
+
+  entity.register("collision", (a, b) => {
     a.removeSelf()
   })
   return entity

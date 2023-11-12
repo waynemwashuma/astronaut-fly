@@ -48,6 +48,7 @@ manager.registerSystem("input", input)
 manager.registerSystem("cam", cameraController)
 manager.registerSystem('wrap', new DefaultSystem("wrap"))
 manager.registerSystem('follow', new DefaultSystem("follow"))
+manager.registerSystem('magnetizer', new DefaultSystem("magnetizer"))
 manager.registerSystem("spawner", powerSpawner)
 
 //powerSpawner.genBox(400)
@@ -60,7 +61,6 @@ function endGame(character) {
   if (start) return startGame(character)
   manager.clear()
 }
-
 function startGame(character) {
   let movable = character.get("movable")
   let transform = character.get("transform")
@@ -92,4 +92,4 @@ export {
 }
 
 console.log(manager);
-manager.pause()
+//manager.pause()

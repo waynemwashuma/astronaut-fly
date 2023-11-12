@@ -30,6 +30,13 @@ addEventListener("click", () => {
   movable.velocity.add(dir)
   movable.velocity.clamp(0,500)
 })
+setTimeout(()=>{
+  character.get("transform").position.y = -380
+  //manager.update(0.016)
+  //manager.pause()
+  manager.update(0.016)
+  manager.update(0.016)
+},200)
 
 
 /*let b = new Box(50, 80)

@@ -11,6 +11,7 @@ import {
   StaticImageMaterial
 } from "../../chaos.module.js"
 
+import { Magnetizer } from "../../components/index.js"
 let img = new Image()
 img.decoding = "sync"
 img.src = "/src/assets/imgs/magnet.png"
@@ -32,8 +33,11 @@ export function createMagnet(x, y) {
     .attach("body", body)
     .attach("sprite", new Sprite(geometry, material))
 
-  entity.register("collision", () => {
+  entity.addTag("powerup")
+  
+  entity.register("precollision", (a, b) => {
     a.removeSelf()
+    if (!b.has("magnetizer")) b.attach("magnetizer", new Magnetizer())
   })
   return entity
 }

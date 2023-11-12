@@ -1,26 +1,31 @@
-import {Component,Vector,BoundingBox} from "../chaos.module.js"
+import { Component, Vector, BoundingBox, BoundingCircle } from "../chaos.module.js"
 
-export class Magnetizer extends Component{
-  time = 2000
-  querybound = new BoundingBox(-45,-45,45,45)
-  constructor(){
+export class Magnetizer extends Component {
+  time = 5
+  querybound = new BoundingCircle(200)
+  constructor() {
     super()
   }
-  init(entity){
+  init(entity) {
+    this.entity = entity
     this.position = entity.get("transform").position
     super.init(entity)
   }
-  update(dt){ 
+  update(dt) {
     this.querybound.update(this.position)
     let attracted = this.entity.query(this.querybound)
     for (var i = 0; i < attracted.length; i++) {
+      if (!attracted[i].hasTag("powerup"))
+        continue
+        console.log(true);
       let pos = attracted[i].get("transform").position
-      Vector.lerp(
-        this.position,pos,0.1,
-        pos
-        )
+      let target = Vector.lerp(
+        pos, this.position, 0.01
+      )
+      pos.copy(target)
     }
-    if(time < 0)this.entity.removeSelf()
-    time -= dt
+    //console.log(attracted);
+    if (this.time < 0) this.entity.remove("magnetizer")
+    this.time -= dt
   }
 }

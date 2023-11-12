@@ -70,7 +70,7 @@ const Overlaps = {
       (x - b.pos.x) * (x - b.pos.x) +
       (y - b.pos.y) * (y - b.pos.y);
 
-    return distance < b.r;
+    return distance < b.r * b.r;
   }
 };
 
@@ -3882,11 +3882,13 @@ class NaiveBroadphase extends Broadphase {
    * @returns {Body[]}
    */
   query(bound, target) {
-    closeObjects = target || [];
-    for (var i = 0; i < this.objects.length; i++) {
-      let ob = this.world.objects[i];
-      if (ob.bounds.intersects(bound) < dist)
-        closeObjects.push(ob);
+    let closeObjects = target || [];
+
+    for (var i = 0; i < this.bodies.length; i++) {
+      let ob = this.bodies[i];
+      //console.log(ob.position.distanceTo(bound.pos));
+      if (ob.bounds.intersects(bound))
+        closeObjects.push(ob.entity);
     }
     return closeObjects
   }
@@ -6617,7 +6619,7 @@ function defaultPrecollisionHandler(clmds) {
   for (let i = 0; i < clmds.length; i++) {
     a = clmds[i].a.entity.getHandler("precollision");
     b = clmds[i].b.entity.getHandler("precollision");
-
+    //console.log(clmds);
     if (a) a(
       clmds[i].a.entity,
       clmds[i].b.entity,

@@ -38,7 +38,7 @@ export class PowerUpSpawner extends System {
     let startX = innerWidth - this.padding.x / 2
     for (let i = startX; i >= 0; i -= this.padding.x) {
       for (let j = innerHeight / 2; j >= 0; j -= this.padding.y) {
-        let powerUp = createStar(i, j + y)
+        let powerUp = createMagnet(i, j + y)
         this.manager.add(powerUp)
       }
     }

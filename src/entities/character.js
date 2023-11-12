@@ -16,7 +16,6 @@ let img = new Image()
 img.src = "/src/assets/imgs/astronaut.png"
 let geometry = new BufferGeometry()
 let material = new StaticImageMaterial(img)
-
 material.width = 80
 material.height = 50
 
