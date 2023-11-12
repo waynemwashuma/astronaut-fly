@@ -3,14 +3,12 @@ import {
   createBounds,
   createStar
 } from "./src/index.js"
-import { manager, cameraController, domEvents,powerSpawner } from "./src/main.js"
-import {Vector} from "./src/chaos.module.js"
+import { manager, cameraController, domEvents, powerSpawner,renderer } from "./src/main.js"
+import { Vector } from "./src/chaos.module.js"
 let character = createCharacter(innerWidth / 2, 0, -90)
 let bounds = createBounds()
-
+//renderer.domElement.remove()
 let up = new Vector(0, 1)
-
-
 
 manager.add(character)
 manager.add(bounds)
@@ -18,7 +16,7 @@ manager.add(bounds)
 cameraController.followEntity(character)
 powerSpawner.position = character.get("transform").position
 
-addEventListener("click", () => {
+function characterReact() {
   let rot = character.get("transform").orientation
   let movable = character.get("movable")
   let dir = Vector.fromRad(rot.radian)
@@ -28,21 +26,13 @@ addEventListener("click", () => {
   dir.multiply(500)
   movable.rotation.radian += Math.PI * angMult
   movable.velocity.add(dir)
-  movable.velocity.clamp(0,500)
-})
-setTimeout(()=>{
+  movable.velocity.clamp(0, 500)
+}
+addEventListener("click",characterReact)
+setTimeout(() => {
   character.get("transform").position.y = -380
   //manager.update(0.016)
   //manager.pause()
   manager.update(0.016)
   manager.update(0.016)
-},200)
-
-
-/*let b = new Box(50, 80)
-b.type = Body.STATIC
-manager.add(
-  Entity.Default(innerWidth / 2, -80)
-  .attach("body", b)
-  .attach("sprite", new BodySprite())
-)*/
+}, 200)

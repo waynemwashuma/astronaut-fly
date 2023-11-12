@@ -11,7 +11,7 @@ export class PowerUpSpawner extends System {
   padding = new Vector(0, 100)
   next = innerHeight
   position = null
-  period = -innerHeight
+  period = -innerHeight * 2
   offset = 0
   manager = null
   constructor(position) {
@@ -34,16 +34,31 @@ export class PowerUpSpawner extends System {
     this.genBox(offset)
 
   }
-  genBox(y) {
-    let startX = innerWidth - this.padding.x / 2
-    for (let i = startX; i >= 0; i -= this.padding.x) {
-      for (let j = innerHeight / 2; j >= 0; j -= this.padding.y) {
-        let powerUp = createMagnet(i, j + y)
+  genBox(off) {
+    let padX = this.padding.x
+    let padY = this.padding.y
+    let repeatX = (innerWidth - padX) / padX
+    let repeatY = (innerHeight) / padY
+    
+    for (let i = 0; i <= repeatX; i++) {
+      for (let j = 0; j <= repeatY; j++) {
+        let x = i * padX + padX/2,
+          y = j * padY - innerHeight/2 + off
+        let powerUp = createStar(x, y)
+        if (
+          (i == 0 ||i == repeatX) &&
+          (j % 2 == 0)
+        )powerUp = createMagnet(x, y)
+        if (
+          (i == 0 ||i == repeatX) &&
+          (j == 0)
+        )powerUp = createBooster(x, y)
+
         this.manager.add(powerUp)
       }
     }
   }
-  reset(){
+  reset() {
     this.next = innerHeight
   }
 

@@ -17,7 +17,6 @@ export class Magnetizer extends Component {
     for (var i = 0; i < attracted.length; i++) {
       if (!attracted[i].hasTag("powerup"))
         continue
-        console.log(true);
       let pos = attracted[i].get("transform").position
       let target = Vector.lerp(
         pos, this.position, 0.01

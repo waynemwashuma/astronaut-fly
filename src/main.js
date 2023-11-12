@@ -78,6 +78,7 @@ function startGame(character) {
   powerSpawner.reset()
   cameraController.reset()
 }
+
 export {
   renderer,
   world,
@@ -90,6 +91,3 @@ export {
   endGame,
   startGame
 }
-
-console.log(manager);
-//manager.pause()

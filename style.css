@@ -1,18 +1,29 @@
 html,
 body {
   margin: 0px;
-}
-
-#ui{
-  z-index: 1;
-  background-color: red;
   width: 100%;
   height:100%;
+}
+#can{
+  background: green;
+}
+#ui{
+  background-color: transparent;
+  width: 100vw;
+  height:100vh;
   position: absolute;
   top:0px;
-  pointer-events: none;
-  display: none;
 }
-canvas{
-  z-index:0;
+#ui-booster{
+  border-radius: 4px;
+  margin: 0px auto;
+  width:200px;
+  height: 50px;
+  background: green;
+}
+#ui-booster-pack{
+  margin:1px 5px;
+  width:5px;
+  height: 20px;
+  background:blue;
 }
