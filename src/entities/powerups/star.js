@@ -11,6 +11,8 @@ import {
   StaticImageMaterial
 } from "../../chaos.module.js"
 
+import {info} from "../../main.js"
+
 let img = new Image()
 img.src = "/src/assets/imgs/star.png"
 let geometry = new BufferGeometry()
@@ -38,6 +40,7 @@ export function createStar(x, y) {
 
   entity.register("precollision", (a, b) => {
     a.removeSelf()
+    info.score.value += 10
   })
   return entity
 }

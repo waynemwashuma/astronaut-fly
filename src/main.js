@@ -22,7 +22,7 @@ export const startposition = new Vector(
 export const info = Object.freeze({
   score: new Signal(0),
   booster: new Signal(0),
-  maxBoosters: 0,
+  maxBoosters: 20,
   gravity: 400
 })
 
