@@ -23,22 +23,29 @@ manager.add(character)
 manager.add(bounds)
 
 addEventListener("click", characterReact)
+addEventListener("keydown", e => {
+  if (e.key === " ")
+    characterReact()
+})
+addEventListener('resize',()=>{
+  renderer.setViewport(innerWidth,innerHeight)
+})
 
 cameraController.followEntity(character)
 powerSpawner.position = character.get("transform").position
 
 let start = confirm("Do you want to start yhe game?")
-if(start)
-startGame(character)
+if (start)
+  startGame(character)
 else
-endGame(character)
+  endGame(character)
 
 
 
 function characterReact() {
-  
-  if(info.booster.value <= 0)return
-  
+
+  if (info.booster.value <= 0) return
+
   let rot = character.get("transform").orientation
   let movable = character.get("movable")
   let dir = Vector.fromRad(rot.radian)
