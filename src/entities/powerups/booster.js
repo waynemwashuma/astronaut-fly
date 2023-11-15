@@ -11,6 +11,8 @@ import {
   StaticImageMaterial
 } from "../../chaos.module.js"
 
+import {info} from "../../main.js"
+
 let img = new Image()
 img.src = "/src/assets/imgs/booster.png"
 let geometry = new BufferGeometry()
@@ -33,7 +35,8 @@ export function createBooster(x, y) {
 
   entity.addTag("powerup")
 
-  entity.register("collision", (a, b) => {
+  entity.register("precollision", (a, b) => {
+    info.booster.value += 1
     a.removeSelf()
   })
   return entity

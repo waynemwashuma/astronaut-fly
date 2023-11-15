@@ -2,28 +2,45 @@ html,
 body {
   margin: 0px;
   width: 100%;
-  height:100%;
+  height: 100%;
 }
-#can{
+
+#can {
   background: green;
 }
-#ui{
+
+#ui {
   background-color: transparent;
   width: 100vw;
-  height:100vh;
+  height: 100vh;
   position: absolute;
-  top:0px;
+  top: 0px;
 }
-#ui-booster{
+
+#ui-booster {
   border-radius: 4px;
   margin: 0px auto;
-  width:200px;
+  width: 200px;
   height: 50px;
   background: green;
 }
-#ui-booster-pack{
-  margin:1px 5px;
-  width:5px;
+#ui-booster > div{
+  display: flex;
+  height: 50%;
+  width:100%;
+  background:cyan;
+}
+#ui-booster > div > div {
+  margin: 3px 5px;
+  width: 5px;
   height: 20px;
-  background:blue;
+  background: blue;
+}
+#ui-score{
+  position: absolute;
+  width:100px;
+  height: 50px;
+  background:red;
+  top:0px;
+  right:0px;
 }

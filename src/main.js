@@ -6,41 +6,42 @@ import {
   EventDispatcher,
   DOMEventHandler,
   System,
-  Vector
+  Vector,
+  Signal
 } from "./chaos.module.js"
 import {
   CamFollowerController,
   DefaultSystem,
   PowerUpSpawner
 } from "./system/index.js"
-let startposition = new Vector(
+
+export const startposition = new Vector(
   innerWidth / 2,
   innerHeight / 2
 )
-let gravity = 400
-let info = {
-  score:0,
-  boosters: 9,
-  maxBoosters: 9
-}
-const manager = new Manager()
+export const info = Object.freeze({
+  score: new Signal(0),
+  booster: new Signal(0),
+  maxBoosters: 0,
+  gravity: 400
+})
 
-const renderer = new Renderer2D()
-renderer.bindTo("#can")
-renderer.setViewport(innerWidth, innerHeight)
 
-const world = new World()
+export const manager = new Manager()
+export const renderer = new Renderer2D()
+export const world = new World()
+export const domEvents = new EventDispatcher()
+export const input = new Input(domEvents)
+export const cameraController = new CamFollowerController(renderer.camera)
+export const powerSpawner = new PowerUpSpawner()
+
 world.gravity = 400
 world.angularDamping = 0.001
 
-let domEvents = new EventDispatcher()
+renderer.bindTo("#can")
+renderer.setViewport(innerWidth, innerHeight)
 
-let input = new Input(domEvents)
-
-let cameraController = new CamFollowerController(renderer.camera)
 cameraController.setOffset(0, -innerHeight / 2)
-
-let powerSpawner = new PowerUpSpawner()
 
 manager.registerSystem("renderer", renderer)
 manager.registerSystem("world", world)
@@ -51,25 +52,25 @@ manager.registerSystem('follow', new DefaultSystem("follow"))
 manager.registerSystem('magnetizer', new DefaultSystem("magnetizer"))
 manager.registerSystem("spawner", powerSpawner)
 
-//powerSpawner.genBox(400)
-
-function endGame(character) {
-  let allowed = manager.getEntitiesByTags(["persistent"])
-  manager.clear()
-  allowed.forEach(e => manager.add(e))
+export function endGame(character) {
   let start = confirm("Do you want to continue?")
   if (start) return startGame(character)
-  manager.clear()
+  character.get("transform").position.copy(startposition)
+  manager.pause()
 }
-function startGame(character) {
+
+export function startGame(character) {
   let movable = character.get("movable")
   let transform = character.get("transform")
-
+  
+  let allowed = manager.getEntitiesByTags(["persistent"])
+  manager.clear()
+  allowed.forEach(e=>manager.add(e))
   renderer.camera.transform.position.set(0, 0)
-  
-  info.boosters = info.maxBoosters
-  info.score = 0
-  
+
+  info.booster.value = info.maxBoosters
+  info.score.value = 0
+
   transform.position.copy(startposition)
   transform.orientation.degree = -90
   movable.rotation.degree = 0
@@ -77,17 +78,4 @@ function startGame(character) {
 
   powerSpawner.reset()
   cameraController.reset()
-}
-
-export {
-  renderer,
-  world,
-  manager,
-  cameraController,
-  input,
-  domEvents,
-  powerSpawner,
-  info,
-  endGame,
-  startGame
 }
