@@ -9,7 +9,9 @@ import {
   domEvents,
   powerSpawner,
   renderer,
-  info
+  info,
+  startGame,
+  endGame
 } from "./src/main.js"
 import { Vector } from "./src/chaos.module.js"
 let character = createCharacter(innerWidth / 2, 0, -90)
@@ -20,8 +22,18 @@ let up = new Vector(0, 1)
 manager.add(character)
 manager.add(bounds)
 
+addEventListener("click", characterReact)
+
 cameraController.followEntity(character)
 powerSpawner.position = character.get("transform").position
+
+let start = confirm("Do you want to start yhe game?")
+if(start)
+startGame(character)
+else
+endGame(character)
+
+
 
 function characterReact() {
   
@@ -39,11 +51,3 @@ function characterReact() {
   movable.velocity.clamp(0, 500)
   info.booster.value -= 1
 }
-addEventListener("click", characterReact)
-setTimeout(() => {
-  character.get("transform").position.y = -380
-  //manager.update(0.016)
-  //manager.pause()
-  manager.update(0.016)
-  manager.update(0.016)
-}, 200)

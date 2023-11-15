@@ -43,7 +43,7 @@ export class PowerUpSpawner extends System {
     for (let i = 0; i <= repeatX; i++) {
       for (let j = 0; j <= repeatY; j++) {
         let x = i * padX + padX/2,
-          y = j * padY - innerHeight + off
+          y = j * padY - innerHeight/2 + off
         let powerUp = createStar(x, y)
         if (
           (i == 0 ||i == repeatX) &&
