@@ -34,12 +34,12 @@ addEventListener('resize',()=>{
 cameraController.followEntity(character)
 powerSpawner.position = character.get("transform").position
 
-let start = confirm("Do you want to start yhe game?")
-if (start)
+let start = false //confirm("Do you want to start the game?")
+/*if (start)
   startGame(character)
 else
   endGame(character)
-
+*/
 
 
 function characterReact() {

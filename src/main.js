@@ -23,9 +23,9 @@ export const info = Object.freeze({
   score: new Signal(0),
   booster: new Signal(0),
   maxBoosters: 20,
-  gravity: 400
+  gravity: 400,
 })
-
+export const ingame = new Signal(false)
 
 export const manager = new Manager()
 export const renderer = new Renderer2D()
@@ -51,23 +51,28 @@ manager.registerSystem('wrap', new DefaultSystem("wrap"))
 manager.registerSystem('follow', new DefaultSystem("follow"))
 manager.registerSystem('magnetizer', new DefaultSystem("magnetizer"))
 manager.registerSystem("spawner", powerSpawner)
+manager.pause()
 
-export function endGame(character) {
-  let start = confirm("Do you want to continue?")
-  if (start) return startGame(character)
-  character.get("transform").position.copy(startposition)
+export function endGame() {
+  let character = manager.getEntityByTags(["character"])
+  ingame.value = false
   manager.pause()
+
 }
 
-export function startGame(character) {
+export function startGame() {
+  let allowed = manager.getEntitiesByTags(["persistent"])
+  let character = manager.getEntityByTags(["character"])
+  if(character == void 0)throw 'Game entities not added yet'
   let movable = character.get("movable")
   let transform = character.get("transform")
-  
-  let allowed = manager.getEntitiesByTags(["persistent"])
-  manager.clear()
-  allowed.forEach(e=>manager.add(e))
-  renderer.camera.transform.position.set(0, 0)
 
+  transform.position.copy(startposition)
+
+  manager.clear()
+  allowed.forEach(e => manager.add(e))
+  renderer.camera.transform.position.set(0, 0)
+  //console.log(manager.objects.length)
   info.booster.value = info.maxBoosters
   info.score.value = 0
 
@@ -78,4 +83,6 @@ export function startGame(character) {
 
   powerSpawner.reset()
   cameraController.reset()
+  ingame.value = true
+  manager.play()
 }

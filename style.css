@@ -24,25 +24,56 @@ body {
   height: 50px;
   background: green;
 }
-#ui-booster > div{
+
+#ui-booster>div {
   display: flex;
   height: 50%;
-  width:100%;
-  background:cyan;
+  width: 100%;
+  background: cyan;
 }
-#ui-booster > div > div {
+
+#ui-booster>div>div {
   margin: 3px 5px;
   width: 5px;
   height: 20px;
   background: blue;
 }
-#ui-score{
+
+#ui-score {
   position: absolute;
-  width:100px;
+  width: 100px;
   height: 50px;
-  background:red;
-  top:0px;
-  right:0px;
-  color:white;
+  background: red;
+  top: 0px;
+  right: 0px;
+  color: white;
   text-align: center;
+  vertical-align: middle
+}
+
+#play-alert {
+  background: red;
+  width: 60%;
+  height: 30%;
+  margin:0px auto;
+}
+
+#play-alert>button {
+  display:block;
+  margin:20% auto 0px;
+}
+#play-alert>p {
+  position: relative;
+  width:100%;
+}
+.popup {
+  width: initial;
+  height: initial;
+  transition: all 3 ease-in;
+}
+
+.hide {
+  width: 0px;
+  height: 0px;
+  transition: all 3s ease-out;
 }

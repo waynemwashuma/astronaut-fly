@@ -37,7 +37,7 @@ export function createBounds() {
 
   entity.register("collision", (a, b) => {
     if (b.hasTag("character")) {
-      return endGame(b)
+      return endGame()
     }
   })
   entity.addTag("bounds")
