@@ -67,15 +67,3 @@ body {
   position: relative;
   width: 100%;
 }
-
-.popup {
-  width: initial;
-  height: initial;
-  transition: all 3 ease-in;
-}
-
-.hide {
-  width: 0px;
-  height: 0px;
-  transition: all 3s ease-out;
-}
