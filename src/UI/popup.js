@@ -15,12 +15,12 @@ yes.onclick = e => {
 }
 
 export function setPopup(signal) {
-  if (!signal.value){
-    let parent = document.getElementById('play-alert')
-  parent.classList.toggle("show")
-  parent.classList.toggle("hide")
+  const parent = document.getElementById('play-alert')
+  if (signal.value){
+  parent.style.display = "none"
+  }else{
+    parent.style.display = "initial"
   }
-
 }
 
 ingame.addListener(setPopup)
