@@ -6,11 +6,9 @@ let no = document.getElementById("alert-no")
 
 no.onclick = e => {
   let parent = document.getElementById('play-alert')
-  parent.classList.toggle("hide",true)
 }
 yes.onclick = e => {
   let parent = document.getElementById('play-alert')
-  parent.classList.toggle("hide",true)
   startGame()
 }
 
