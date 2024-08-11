@@ -17,7 +17,7 @@ export function setPopup(signal) {
   if (signal.value){
   parent.style.display = "none"
   }else{
-    parent.style.display = "initial"
+    parent.style.display = "block"
   }
 }
 
