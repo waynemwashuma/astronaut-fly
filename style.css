@@ -55,17 +55,19 @@ body {
   background: red;
   width: 60%;
   height: 30%;
-  margin:0px auto;
+  margin: 0px auto;
 }
 
 #play-alert>button {
-  display:block;
-  margin:20% auto 0px;
+  display: block;
+  margin: 20% auto 0px;
 }
+
 #play-alert>p {
   position: relative;
-  width:100%;
+  width: 100%;
 }
+
 .popup {
   width: initial;
   height: initial;
