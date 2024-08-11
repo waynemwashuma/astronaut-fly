@@ -5,7 +5,7 @@ let yes = document.getElementById("alert-yes")
 let no = document.getElementById("alert-no")
 
 no.onclick = e => {
-  let parent = document.getElementById('play-alert')
+  location.assign("./index.html")
 }
 yes.onclick = e => {
   let parent = document.getElementById('play-alert')
@@ -14,9 +14,9 @@ yes.onclick = e => {
 
 export function setPopup(signal) {
   const parent = document.getElementById('play-alert')
-  if (signal.value){
-  parent.style.display = "none"
-  }else{
+  if (signal.value) {
+    parent.style.display = "none"
+  } else {
     parent.style.display = "block"
   }
 }
