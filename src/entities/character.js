@@ -13,7 +13,7 @@ import {
 import {WrapAround} from "../components/index.js"
 
 let img = new Image()
-img.src = "/src/assets/imgs/astronaut.png"
+img.src = new URL("../assets/imgs/astronaut.png", import.meta.url).href
 let geometry = new BufferGeometry()
 let material = new StaticImageMaterial(img)
 material.width = 80

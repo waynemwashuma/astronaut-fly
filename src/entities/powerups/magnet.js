@@ -14,7 +14,7 @@ import {
 import { Magnetizer } from "../../components/index.js"
 let img = new Image()
 img.decoding = "sync"
-img.src = "/src/assets/imgs/magnet.png"
+img.src = new URL("../../assets/imgs/magnet.png", import.meta.url).href
 let geometry = new BufferGeometry()
 let material = new StaticImageMaterial(img)
 

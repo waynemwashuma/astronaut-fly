@@ -14,7 +14,7 @@ import {
 import {info} from "../../main.js"
 
 let img = new Image()
-img.src = "/src/assets/imgs/booster.png"
+img.src = new URL("../../assets/imgs/booster.png", import.meta.url).href
 let geometry = new BufferGeometry()
 let material = new StaticImageMaterial(img)
 
