@@ -1,7 +1,7 @@
 import {
   createCharacter,
   createBounds,
-  createStar
+  createSky
 } from "./src/index.js"
 import {
   manager,
@@ -10,15 +10,18 @@ import {
   powerSpawner,
   renderer,
   info,
+  startposition,
   startGame,
   endGame
 } from "./src/main.js"
 import { Vector } from "./src/chaos.module.js"
 let character = createCharacter(innerWidth / 2, 0, -90)
+let sky = createSky(character.get("transform").position, startposition.y)
 let bounds = createBounds()
 //renderer.domElement.remove()
 let up = new Vector(0, 1)
 
+manager.add(sky)
 manager.add(character)
 manager.add(bounds)
 

@@ -4,8 +4,6 @@ import {
   World,
   Input,
   EventDispatcher,
-  DOMEventHandler,
-  System,
   Vector,
   Signal
 } from "./chaos.module.js"
@@ -50,6 +48,7 @@ manager.registerSystem("cam", cameraController)
 manager.registerSystem('wrap', new DefaultSystem("wrap"))
 manager.registerSystem('follow', new DefaultSystem("follow"))
 manager.registerSystem('magnetizer', new DefaultSystem("magnetizer"))
+manager.registerSystem('sky', new DefaultSystem("sky"))
 manager.registerSystem("spawner", powerSpawner)
 manager.pause()
 
