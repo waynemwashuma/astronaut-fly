@@ -2,21 +2,12 @@ import { info } from "../main.js"
 
 
 let parent = document.getElementById("ui-booster")
+const maxBoosters = Math.max(1, Math.floor(info.maxBoosters || 20))
+parent.style.setProperty("--booster-max", String(maxBoosters))
 
 export function setBoosterCount(signal) {
-  let initial = signal.value
-
-  parent.innerHTML = ""
-
-  for (let i = 10; i < initial; i += 10) {
-    let container = parent.appendChild(document.createElement("div"))
-    for (i = 0; i < 10; i++)
-      container.appendChild(document.createElement("div"))
-    initial -= 10
-  }
-  let container = parent.appendChild(document.createElement("div"))
-
-  for (let i = 0; i < initial; i++)
-    container.appendChild(document.createElement("div"))
+  const count = Math.max(0, Math.min(maxBoosters, Math.floor(signal.value)))
+  parent.style.setProperty("--booster-count", String(count))
+  parent.setAttribute("data-count", `${count}/${maxBoosters}`)
 }
 info.booster.addListener(setBoosterCount)

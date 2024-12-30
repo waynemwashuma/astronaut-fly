@@ -27,6 +27,18 @@ body {
   position: fixed;
   inset: 0;
   background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+#can > canvas {
+  border-radius: 14px;
+  border: 1px solid rgba(125, 140, 255, 0.32);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.45);
+  max-width: 100%;
+  max-height: 100%;
 }
 
 #ui {
@@ -38,46 +50,79 @@ body {
   pointer-events: none;
 }
 
+#ui-top {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+}
+
 #ui-booster {
   pointer-events: auto;
+  --booster-max: 20;
+  --booster-count: 0;
   border-radius: 12px;
-  margin: 16px auto 0;
-  width: min(360px, calc(100vw - 24px));
-  min-height: 58px;
-  padding: 8px 12px;
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 120px;
+  max-width: 440px;
+  width: auto;
+  height: 58px;
+  padding: 8px;
   background: rgba(11, 13, 27, 0.82);
   border: 1px solid var(--line);
   backdrop-filter: blur(6px);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+  position: relative;
+  overflow: hidden;
 }
 
-#ui-booster > div {
+#ui-booster::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 8px;
+  bottom: 8px;
+  border-radius: 8px;
+  background: rgba(7, 10, 21, 0.85);
+  border: 1px solid rgba(111, 129, 247, 0.3);
+}
+
+#ui-booster::after {
+  content: attr(data-count);
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: calc((100% - 16px) * var(--booster-count) / var(--booster-max));
+  min-width: 0;
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, #8e7eff 0%, #2a7fff 100%);
+  box-shadow: 0 0 14px rgba(90, 125, 255, 0.28);
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Orbitron", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.05em;
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  width: 100%;
-  margin-bottom: 6px;
-}
-
-#ui-booster > div:last-child {
-  margin-bottom: 0;
-}
-
-#ui-booster > div > div {
-  width: 7px;
-  height: 16px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #8e7eff 0%, #2a7fff 100%);
-  box-shadow: 0 0 8px rgba(90, 125, 255, 0.35);
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #ui-score {
   pointer-events: auto;
-  position: absolute;
+  position: relative;
+  flex: 0 0 auto;
   min-width: 86px;
   height: 52px;
-  top: 16px;
-  right: 16px;
   border-radius: 12px;
   border: 1px solid rgba(130, 145, 255, 0.45);
   background: rgba(10, 12, 24, 0.85);
@@ -144,16 +189,21 @@ body {
 }
 
 @media (max-width: 640px) {
-  #ui-score {
+  #ui-top {
     top: 12px;
-    right: 12px;
+    left: 10px;
+    right: 10px;
+    gap: 8px;
+  }
+
+  #ui-score {
     height: 46px;
     line-height: 46px;
     font-size: 18px;
   }
 
   #ui-booster {
-    margin-top: 12px;
+    min-width: 90px;
   }
 
   #play-alert {

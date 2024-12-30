@@ -9,19 +9,28 @@ import { createStar, createMagnet, createBooster } from "../entities/index.js"
 
 export class PowerUpSpawner extends System {
   padding = new Vector(0, 100)
-  next = innerHeight
+  viewportWidth = 390
+  viewportHeight = 844
+  next = this.viewportHeight
   position = null
-  period = -innerHeight * 2
+  period = -this.viewportHeight * 2
   offset = 0
   manager = null
   constructor(position) {
     super()
-    this.offset = -innerHeight
     this.position = position || new Vector()
-    this.padding.x = innerWidth / 3
+    this.configureViewport(this.viewportWidth, this.viewportHeight)
   }
   init(manager) {
     this.manager = manager
+  }
+  configureViewport(width, height) {
+    this.viewportWidth = width
+    this.viewportHeight = height
+    this.offset = -height
+    this.period = -height * 2
+    this.padding.x = width / 3
+    this.next = height
   }
   update() {
     if (this.position.y <= this.next) {
@@ -37,13 +46,13 @@ export class PowerUpSpawner extends System {
   genBox(off) {
     let padX = this.padding.x
     let padY = this.padding.y
-    let repeatX = (innerWidth - padX) / padX
-    let repeatY = (innerHeight) / padY
+    let repeatX = (this.viewportWidth - padX) / padX
+    let repeatY = this.viewportHeight / padY
     
     for (let i = 0; i <= repeatX; i++) {
       for (let j = 0; j <= repeatY; j++) {
         let x = i * padX + padX/2,
-          y = j * padY - innerHeight/2 + off
+          y = j * padY - this.viewportHeight/2 + off
         let powerUp = createStar(x, y)
         if (
           (i == 0 ||i == repeatX) &&
@@ -59,7 +68,7 @@ export class PowerUpSpawner extends System {
     }
   }
   reset() {
-    this.next = innerHeight
+    this.next = this.viewportHeight
   }
 
 }

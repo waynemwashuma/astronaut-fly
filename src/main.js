@@ -14,8 +14,8 @@ import {
 } from "./system/index.js"
 
 export const startposition = new Vector(
-  innerWidth / 2,
-  innerHeight / 2
+  0,
+  0
 )
 export const info = Object.freeze({
   score: new Signal(0),
@@ -32,14 +32,32 @@ export const domEvents = new EventDispatcher()
 export const input = new Input(domEvents)
 export const cameraController = new CamFollowerController(renderer.camera)
 export const powerSpawner = new PowerUpSpawner()
+const GAME_ASPECT = 9 / 16
+const MAX_GAME_WIDTH = 430
+const MAX_GAME_HEIGHT = 860
+
+function getViewportSize() {
+  const maxWidth = Math.min(window.innerWidth, MAX_GAME_WIDTH)
+  const maxHeight = Math.min(window.innerHeight, MAX_GAME_HEIGHT)
+  const width = Math.max(240, Math.floor(Math.min(maxWidth, maxHeight * GAME_ASPECT)))
+  const height = Math.max(426, Math.floor(width / GAME_ASPECT))
+  return { width, height }
+}
 
 world.gravity = 400
 world.angularDamping = 0.001
 
 renderer.bindTo("#can")
-renderer.setViewport(innerWidth, innerHeight)
-
-cameraController.setOffset(0, -innerHeight / 2)
+export function resizeGameViewport() {
+  const { width, height } = getViewportSize()
+  renderer.setViewport(width, height)
+  startposition.set(width / 2, height / 2)
+  cameraController.setOffset(0, -height / 2)
+  cameraController.setViewportHeight(height)
+  cameraController.reset()
+  powerSpawner.configureViewport(width, height)
+}
+resizeGameViewport()
 
 manager.registerSystem("renderer", renderer)
 manager.registerSystem("world", world)

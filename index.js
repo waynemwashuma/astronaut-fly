@@ -11,11 +11,12 @@ import {
   renderer,
   info,
   startposition,
+  resizeGameViewport,
   startGame,
   endGame
 } from "./src/main.js"
 import { Vector } from "./src/chaos.module.js"
-let character = createCharacter(innerWidth / 2, 0, -90)
+let character = createCharacter(startposition.x, 0, -90)
 let sky = createSky(character.get("transform").position, startposition.y)
 let bounds = createBounds()
 //renderer.domElement.remove()
@@ -31,7 +32,7 @@ addEventListener("keydown", e => {
     characterReact()
 })
 addEventListener('resize',()=>{
-  renderer.setViewport(innerWidth,innerHeight)
+  resizeGameViewport()
 })
 
 cameraController.followEntity(character)
