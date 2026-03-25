@@ -5016,26 +5016,7 @@ class Renderer {
   update(dt) {
     throw "Override Renderer.update()"
   }
-  /**
-   * Requests an animation frame.
-   * 
-   * @protected
-   */
-  RAF() {
-    this._rafID = requestAnimationFrame(this._update);
-  }
-  /**
-   * Starts the rendering cycle of a renderer.
-   */
-  play() {
-    this.RAF();
-  }
-  /**
-   * Stops the rendering cycle of a renderer.
-   */
-  pause() {
-    cancelAnimationFrame(this._rafID);
-  }
+
   /**
    * Attaches the renderer to a given html element by its selector.
    * 
@@ -7025,13 +7006,6 @@ class Input {
  */
 class Manager {
   /**
-   * RAF number of current frame.Used for pausing the manager.
-   * 
-   * @private
-   * @type number
-   */
-  _rafID = undefined
-  /**
    * @private
    * @type {Object<string, function>}
    */
@@ -7077,7 +7051,7 @@ class Manager {
    * 
    * @type boolean
    */
-  playing = false
+  playing = true
   /**
    * 
    * @private
@@ -7141,6 +7115,10 @@ class Manager {
    * @private
    */
   _update = accumulate => {
+    if(!this.playing){
+      this.RAF()
+      return
+    }
     let dt = this.clock.update(accumulate);
 
     if (this._accumulator < this.frameRate) {
@@ -7202,7 +7180,7 @@ class Manager {
     this.events.trigger("init", this);
     this.update(0);
     this._initialized = true;
-    if (this.playing) this.play();
+    this.RAF();
   }
   /**
    * Adds an entity to the manager and initializes it.
@@ -7306,23 +7284,21 @@ class Manager {
    * This starts up the update loop of the manager
    */
   play() {
-    if (!this._initialized) {
-      this.playing = true;
-      return
+    this.playing = true
+
+    if(this._initialized){
+      this.events.trigger("play");
     }
-    this.RAF();
-    this.events.trigger("play");
   }
   /**
    * This stops the update loop of the manager
    */
   pause() {
-    if (!this._initialized) {
-      this.playing = false;
-      return
+        this.playing = false
+
+    if(this._initialized){
+      this.events.trigger("pause");
     }
-    cancelAnimationFrame(this._rafID);
-    this.events.trigger("pause");
   }
   /**
    * This method might be useless as systems are initialized on being added
