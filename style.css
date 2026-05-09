@@ -6,6 +6,8 @@
   --blue: #2a7fff;
   --purple: #8a2eff;
   --line: rgba(119, 130, 255, 0.35);
+  --game-width: 240px;
+  --game-height: 426px;
 }
 
 * {
@@ -23,42 +25,50 @@ body {
   background: var(--bg-main);
 }
 
-#can {
-  position: fixed;
-  inset: 0;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+body {
+  display: grid;
+  place-items: center;
   padding: 8px;
 }
 
-#can > canvas {
-  border-radius: 14px;
+#app-shell {
+  position: relative;
+  width: var(--game-width);
+  height: var(--game-height);
+  border-radius: 18px;
+  overflow: hidden;
   border: 1px solid rgba(125, 140, 255, 0.32);
   box-shadow: 0 20px 44px rgba(0, 0, 0, 0.45);
-  max-width: 100%;
-  max-height: 100%;
+  background: #06070d;
+}
+
+#can {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+
+#can > canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 #ui {
-  width: 100vw;
-  height: 100vh;
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   pointer-events: none;
 }
 
 #ui-top {
   position: absolute;
-  top: 16px;
+  top: 12px;
   left: 12px;
   right: 12px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   pointer-events: none;
 }
 
@@ -69,15 +79,14 @@ body {
   border-radius: 12px;
   margin: 0;
   flex: 1 1 auto;
-  min-width: 120px;
-  max-width: 440px;
+  min-width: 0;
   width: auto;
-  height: 58px;
-  padding: 8px;
-  background: rgba(11, 13, 27, 0.82);
+  height: 46px;
+  padding: 6px;
+  background: rgba(8, 10, 20, 0.82);
   border: 1px solid var(--line);
   backdrop-filter: blur(6px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.32);
   position: relative;
   overflow: hidden;
 }
@@ -85,10 +94,10 @@ body {
 #ui-booster::before {
   content: "";
   position: absolute;
-  left: 8px;
-  right: 8px;
-  top: 8px;
-  bottom: 8px;
+  left: 6px;
+  right: 6px;
+  top: 6px;
+  bottom: 6px;
   border-radius: 8px;
   background: rgba(7, 10, 21, 0.85);
   border: 1px solid rgba(111, 129, 247, 0.3);
@@ -97,10 +106,10 @@ body {
 #ui-booster::after {
   content: attr(data-count);
   position: absolute;
-  left: 8px;
-  top: 8px;
-  bottom: 8px;
-  width: calc((100% - 16px) * var(--booster-count) / var(--booster-max));
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: calc((100% - 12px) * var(--booster-count) / var(--booster-max));
   min-width: 0;
   border-radius: 8px;
   background:
@@ -108,7 +117,7 @@ body {
   box-shadow: 0 0 14px rgba(90, 125, 255, 0.28);
   color: rgba(255, 255, 255, 0.92);
   font-family: "Orbitron", sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.05em;
   display: flex;
   align-items: center;
@@ -121,17 +130,17 @@ body {
   pointer-events: auto;
   position: relative;
   flex: 0 0 auto;
-  min-width: 86px;
-  height: 52px;
+  min-width: 72px;
+  height: 46px;
   border-radius: 12px;
   border: 1px solid rgba(130, 145, 255, 0.45);
   background: rgba(10, 12, 24, 0.85);
   color: var(--text-main);
   font-family: "Orbitron", sans-serif;
-  font-size: 20px;
-  line-height: 52px;
+  font-size: 18px;
+  line-height: 46px;
   text-align: center;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.32);
 }
 
 #play-alert {
@@ -140,9 +149,10 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(520px, calc(100vw - 24px));
-  min-height: 220px;
-  padding: 24px;
+  width: calc(100% - 24px);
+  max-width: 320px;
+  min-height: 180px;
+  padding: 20px;
   box-sizing: border-box;
   border-radius: 16px;
   border: 1px solid rgba(124, 139, 255, 0.45);
@@ -190,24 +200,19 @@ body {
 
 @media (max-width: 640px) {
   #ui-top {
-    top: 12px;
+    top: 10px;
     left: 10px;
     right: 10px;
     gap: 8px;
   }
 
   #ui-score {
-    height: 46px;
-    line-height: 46px;
-    font-size: 18px;
-  }
-
-  #ui-booster {
-    min-width: 90px;
+    min-width: 66px;
+    font-size: 16px;
   }
 
   #play-alert {
-    min-height: 200px;
+    min-height: 170px;
     padding: 18px;
   }
 

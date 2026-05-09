@@ -51,6 +51,8 @@ renderer.bindTo("#can")
 export function resizeGameViewport() {
   const { width, height } = getViewportSize()
   renderer.setViewport(width, height)
+  document.documentElement.style.setProperty("--game-width", `${width}px`)
+  document.documentElement.style.setProperty("--game-height", `${height}px`)
   startposition.set(width / 2, height / 2)
   cameraController.setOffset(0, -height / 2)
   cameraController.setViewportHeight(height)
