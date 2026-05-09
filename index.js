@@ -6,14 +6,11 @@ import {
 import {
   manager,
   cameraController,
-  domEvents,
   powerSpawner,
-  renderer,
   info,
   startposition,
   resizeGameViewport,
-  startGame,
-  endGame
+  startGame
 } from "./src/main.js"
 import { Vector } from "./src/chaos.module.js"
 let character = createCharacter(startposition.x, 0, -90)
@@ -37,14 +34,7 @@ addEventListener('resize',()=>{
 
 cameraController.followEntity(character)
 powerSpawner.position = character.get("transform").position
-
-let start = false //confirm("Do you want to start the game?")
-/*if (start)
-  startGame(character)
-else
-  endGame(character)
-*/
-
+startGame()
 
 function characterReact() {
 

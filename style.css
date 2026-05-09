@@ -147,7 +147,7 @@ body {
   border-radius: 16px;
   border: 1px solid rgba(124, 139, 255, 0.45);
   background: rgba(8, 9, 16, 0.9);
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
